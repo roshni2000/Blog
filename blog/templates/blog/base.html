@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>MyBlog</title>
+        {% if title %}
+        <title>
+            Django Blog -{{title}}
+        </title>
+        {% else %}
+        <title> Django Blog </title>
+        {% endif %}
+    </head>
+   
+    <body>
+        <nav>
+          <ul>
+            <li>
+              <a href="{% url 'blog-home' %}" >Home</a>
+            </li>
+            <li>
+              <a href="{% url 'blog-about'%}">About us</a>
+            </li>
+            <li>
+              <a href="{% url 'blog-contactus' %}">Contact us</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li style="float: right"><a class="active" href ="{% url 'post-create' %}"> New Post </a></li>
+              <li style="float: right"><a class="active" href ="{% url 'profile' %}"> Profile </a></li>
+              <li style="float: right"><a class="active" href ="{% url 'logout' %}"> Logout </a></li>
+            {% else %}
+              <li style="float:right"><a class="active" href="{% url 'login' %}">Login</a></li>
+              <li style="float:right"><a class="active" href="{% url 'register' %}">Register</a></li>
+              {% endif %}
+          </ul>
+        </nav>
+        <div id="mySidenav" class="sidenav">
+          <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+          <a href="/announcements">Latest Announcements</a>
+          <a href='/'>Recent posts</a>
+          <a href="/users">Users</a>
+        </div>
+
+      
+        <div class="container">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{message.tags}}"></div>
+              {{ message }}
+            {% endfor %}
+            {% endif %}
+            {% block content %} {% endblock %}
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        
+        
+      </body>
+</html>
+<style>
+.container{
+  float:right;
+}
+li {
+  display: inline;
+}
+li {
+  float: left;
+}
+
+a {
+  display: block;
+  padding: 8px;
+  background-color: #ddd7d7f3;
+}
+ul {
+  background-color: #e9c9c9;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color:black;
+}
+
+li {
+  float: left;
+  border:#111
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #111;
+  text-decoration: none;
+}
+.sidenav {
+  height: 30%; /* 100% Full-height */
+  width: 18%; /* 0 width - change this with JavaScript */
+  position:absolute; /* Stay in place */
+  /* z-index: 1; Stay on top */
+  top:0 px; /* Stay at the top */
+  /* right: 100; */
+  background-color: #111;
+  /* overflow-x: hidden; Disable horizontal scroll */
+  padding-top: 10px; /* Place content 60px from the top */
+  /* transition: 0.5s; 0.5 second transition effect to slide in the sidenav */
+  /* float:right; */
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #030303;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+/* @media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+} */
+</style>

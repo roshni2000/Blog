@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %}
+from django.contrib import messages
+{% block content %}
+    {% for users in allusers %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" style="padding-top: 20px;width:200px;height:200px"src ="{{ users.profile.image.url }}">
+        <div class ="media-body">
+            <div class="article-metadata" style="padding-top: 20px;">
+                {% if user == users %}
+                    <a class="mr-2" href="{% url 'profile' %}">{{users}}</a>
+                {% else %}
+            
+                    
+                    <a class="mr-2" href='' onclick ="alert('Login with your username');">{{users}}</a>
+                {% endif %}                    
+            </div>
+            
+        </div>
+        </article>
+    {% endfor %}
+
+       
+{% endblock content %}
